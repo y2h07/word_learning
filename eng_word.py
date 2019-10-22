@@ -29,7 +29,7 @@ if __name__ =="__main__":
     while True:
         i = random.randint(175,181)
         w_list = load_xl(wb,i)
-        print("英文单词：" + w_list[0])
+        print("英文单词：" + w_list[0])#注释
         Cword = input("输入中文意思：")
         if len(w_list) == 2 :
             if Cword == w_list[1]:
