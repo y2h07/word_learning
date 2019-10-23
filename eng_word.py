@@ -7,6 +7,7 @@ Created on Mon Oct 21 17:16:17 2019
 
 import openpyxl
 import random
+import sys
 
 def load_xl(wb,row):
     word_list = []
@@ -22,37 +23,38 @@ def load_xl(wb,row):
         word_list.append(c_list[1])
     
     return word_list
-    
+
+def eq(w_list,Cword):
+    if len(w_list) == 2 :
+        if Cword == w_list[1]:
+            print("You are right!")
+        elif Cword == "quit":
+            sys.exit(0)
+        else:
+            print("You are wrong!Try again!")
+            Cword = input("输入中文意思：")
+            eq(w_list,Cword)
+    elif len(w_list) == 3:
+            if Cword == w_list[1] or Cword == w_list[2]:
+                print("You are right!")
+            elif Cword == "quit":
+                sys.exit(0)
+            else:
+                print("You are wrong!Try again!")
+                Cword = input("输入中文意思：")
+                eq(w_list,Cword)
+
+
 if __name__ =="__main__":
     wb = openpyxl.load_workbook("word_list.xlsx")
     
     while True:
-        i = random.randint(175,181)
+        i = random.randint(1,181)
         w_list = load_xl(wb,i)
-        print("英文单词：" + w_list[0])#注释
+        print("英文单词：" + w_list[0])
         Cword = input("输入中文意思：")
-        if len(w_list) == 2 :
-            if Cword == w_list[1]:
-                print("You are right!")
-                continue
-            elif Cword == "quit":
-                break
-            while Cword != w_list[1]:
-                print("You are wrong!Try again!")
-                Cword = input("输入中文意思：")
-                if Cword == "quit":
-                    break
-        elif len(w_list) == 3:
-            if Cword == w_list[1] or Cword == w_list[2]:
-                print("You are right!")
-                continue
-            elif Cword == "quit":
-                break
-            while Cword != w_list[1]:
-                print("You are wrong!Try again!")
-                Cword = input("输入中文意思：")
-                if Cword == "quit":
-                    break
+        eq(w_list,Cword)
+       
         
             
             
